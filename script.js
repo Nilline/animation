@@ -73,14 +73,14 @@ window.addEventListener("load", function (e) {
 
 				if (!this.config.posItemsX[i]) {
 					if (valueX >= (document.documentElement.clientWidth - item.getBoundingClientRect().width)) {
-						this.config.posItemsX[i] = true;
+						this.config.posItemsX.splice(i, 1, true);
 						this.config.speedDecorX.splice(i, 1, this.getRandomNum('negative'))
 					} else {
 						item.style.cssText += `left: ${Number.parseInt(window.getComputedStyle(item).left) + this.config.speedDecorX[i]}px;`;
 					}
 				} else if (this.config.posItemsX[i]) {
 					if (valueX <= 0) {
-						this.config.posItemsX[i] = false;
+						this.config.posItemsX.splice(i, 1, false);
 						this.config.speedDecorX.splice(i, 1, this.getRandomNum())
 					} else {
 						item.style.cssText += `left: ${Number.parseInt(window.getComputedStyle(item).left) + this.config.speedDecorX[i]}px;`;
@@ -88,14 +88,14 @@ window.addEventListener("load", function (e) {
 				}
 				if (!this.config.posItemsY[i]) {
 					if (valueY >= (this.config.decorBody.clientHeight - item.offsetHeight)) {
-						this.config.posItemsY[i] = true;
+						this.config.posItemsY.splice(i, 1, true);
 						this.config.speedDecorY.splice(i, 1, this.getRandomNum('negative'))
 					} else {
 						item.style.cssText += `top: ${Number.parseInt(window.getComputedStyle(item).top) + this.config.speedDecorY[i]}px;`;
 					}
 				} else if (this.config.posItemsY[i]) {
 					if (valueY <= 0) {
-						this.config.posItemsY[i] = false;
+						this.config.posItemsY.splice(i, 1, false);
 						this.config.speedDecorY.splice(i, 1, this.getRandomNum())
 					} else {
 						item.style.cssText += `top: ${Number.parseInt(window.getComputedStyle(item).top) + this.config.speedDecorY[i]}px;`;
