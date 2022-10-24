@@ -1,63 +1,117 @@
 window.addEventListener("load", function (e) {
-	function setAnimateDecorItems() {
-		const decorMainscreen = document.querySelector('[data-decor-body]'),
-			items = decorMainscreen ? decorMainscreen.querySelectorAll('[data-decor-item]') : [],
-			posItemsX = [], posItemsY = [];
-		if (items.length) {
-			for (let i = 0; i < (items.length * 2); i++) {
-				if (i < items.length) {
-					if (Math.round(Math.random())) {
-						posItemsX.push(true);
-					} else {
-						posItemsX.push(false);
+	class SetAnimateDecorItems {
+		constructor() {
+			this.config = {
+				decorBody: null,
+				items: [],
+				posItemsX: [],
+				posItemsY: [],
+				speedDecorX: [],
+				speedDecorY: [],
+
+				init: true,
+
+				classess: {
+					body: '[data-decor-body]',
+					items: '[data-decor-item]',
+					init: 'init'
+				}
+			};
+			this.setAnimate = this.setAnimate.bind(this);
+			this.config.init ? this.initAnim() : null;
+		}
+		getRandomNum = negative => negative ? Math.round(Math.random() * (-2 - -1) + -1) : Math.round(Math.random() * (2 - 1) + 1);
+
+		initAnim() {
+			this.setConfigValue();
+		}
+
+		setConfigValue() {
+			const decorBodyArr = document.querySelectorAll(this.config.classess.body);
+			if (decorBodyArr.length) {
+				for (let i = 0; i < decorBodyArr.length; i++) {
+					if (decorBodyArr[i].dataset.decorBody === '') {
+						decorBodyArr[i].dataset.decorBody = this.config.classess.init;
+						this.config.decorBody = decorBodyArr[i];
+						const decorItems = this.config.decorBody.querySelectorAll(this.config.classess.items);
+
+						if (decorItems.length) {
+							decorItems.forEach(item => this.config.items.push(item));
+						}
+						break;
 					}
-				} else {
-					if (Math.round(Math.random())) {
-						posItemsY.push(true);
+					continue;
+				}
+			}
+			if (this.config.items) {
+				for (let i = 0; i < (this.config.items.length * 2); i++) {
+					if (i < this.config.items.length) {
+						if (Math.round(Math.random())) {
+							this.config.posItemsX.push(true);
+							this.config.speedDecorX.push(this.getRandomNum('negative'));
+						} else {
+							this.config.posItemsX.push(false);
+							this.config.speedDecorX.push(this.getRandomNum());
+						}
 					} else {
-						posItemsY.push(false);
+						if (Math.round(Math.random())) {
+							this.config.posItemsY.push(true);
+							this.config.speedDecorY.push(this.getRandomNum('negative'));
+						} else {
+							this.config.posItemsY.push(false);
+							this.config.speedDecorY.push(this.getRandomNum());
+						}
 					}
 				}
 			}
+			this.config.items.length ? this.setAnimate() : null;
 		}
-		const getNum = switchh => switchh ? -1 : 1;
-
-		function setAnimate() {
-			items.forEach((item, i) => {
+		setAnimate() {
+			this.config.items.forEach((item, i) => {
 				let valueX = Number.parseInt(window.getComputedStyle(item).left),
 					valueY = Number.parseInt(window.getComputedStyle(item).top);
 
-				if (!posItemsX[i]) {
-					if (valueX >= (window.innerWidth - item.getBoundingClientRect().width)) {
-						posItemsX[i] = true;
+				if (!this.config.posItemsX[i]) {
+					if (valueX >= (document.documentElement.clientWidth - item.getBoundingClientRect().width)) {
+						this.config.posItemsX[i] = true;
+						this.config.speedDecorX.splice(i, 1, this.getRandomNum('negative'))
 					} else {
-						item.style.cssText += `left: ${Number.parseInt(window.getComputedStyle(item).left) + getNum()}px;`;
+						item.style.cssText += `left: ${Number.parseInt(window.getComputedStyle(item).left) + this.config.speedDecorX[i]}px;`;
 					}
-				} else if (posItemsX[i]) {
+				} else if (this.config.posItemsX[i]) {
 					if (valueX <= 0) {
-						posItemsX[i] = false;
+						this.config.posItemsX[i] = false;
+						this.config.speedDecorX.splice(i, 1, this.getRandomNum())
 					} else {
-						item.style.cssText += `left: ${Number.parseInt(window.getComputedStyle(item).left) + getNum(true)}px;`;
+						item.style.cssText += `left: ${Number.parseInt(window.getComputedStyle(item).left) + this.config.speedDecorX[i]}px;`;
 					}
 				}
-				if (!posItemsY[i]) {
-					if (valueY >= (decorMainscreen.clientHeight - item.offsetHeight)) {
-						posItemsY[i] = true;
+				if (!this.config.posItemsY[i]) {
+					if (valueY >= (this.config.decorBody.clientHeight - item.offsetHeight)) {
+						this.config.posItemsY[i] = true;
+						this.config.speedDecorY.splice(i, 1, this.getRandomNum('negative'))
 					} else {
-						item.style.cssText += `top: ${Number.parseInt(window.getComputedStyle(item).top) + getNum()}px;`;
+						item.style.cssText += `top: ${Number.parseInt(window.getComputedStyle(item).top) + this.config.speedDecorY[i]}px;`;
 					}
-				} else if (posItemsY[i]) {
+				} else if (this.config.posItemsY[i]) {
 					if (valueY <= 0) {
-						posItemsY[i] = false;
+						this.config.posItemsY[i] = false;
+						this.config.speedDecorY.splice(i, 1, this.getRandomNum())
 					} else {
-						item.style.cssText += `top: ${Number.parseInt(window.getComputedStyle(item).top) + getNum(true)}px;`;
+						item.style.cssText += `top: ${Number.parseInt(window.getComputedStyle(item).top) + this.config.speedDecorY[i]}px;`;
 					}
 				}
 
 			})
-			requestAnimationFrame(setAnimate);
+			requestAnimationFrame(this.setAnimate);
 		}
-		items.length ? setAnimate() : false;
 	}
-	setAnimateDecorItems();
+	const BodyDecorItems = document.querySelectorAll('[data-decor-body]');
+	if (BodyDecorItems.length) {
+		for (let i = 0; i < BodyDecorItems.length; i++) {
+			if (BodyDecorItems[i].dataset.decorBody === '') {
+				new SetAnimateDecorItems();
+			}
+		};
+	}
 });
