@@ -20,8 +20,22 @@
 
 		.page__decor {
 			position: absolute;
-			transition: all 0.02s ease 0s;
-			background: url('1.png') center / 100% no-repeat;
+		}
+
+		.page__decor img {
+			width: 100%;
+			transition: transform 0.2s linear 0s;
+			transform: scale(1);
+		}
+
+		.page__decor._truck-x-left img,
+		.page__decor._truck-x-right img {
+			transform: scale(0.95, 1.05);
+		}
+
+		.page__decor._truck-y-top img,
+		.page__decor._truck-y-bottom img {
+			transform: scale(1.05, 0.95);
 		}
 
 		.page__decor--1 {
@@ -167,27 +181,67 @@
 </head>
 
 <body>
-	<div data-decor-body class="page">
-		<span data-decor-item class="page__decor page__decor--1"></span>
-		<span data-decor-item class="page__decor page__decor--2"></span>
-		<span data-decor-item class="page__decor page__decor--3"></span>
-		<span data-decor-item class="page__decor page__decor--4"></span>
-		<span data-decor-item class="page__decor page__decor--5"></span>
-		<span data-decor-item class="page__decor page__decor--6"></span>
-		<span data-decor-item class="page__decor page__decor--7"></span>
-		<span data-decor-item class="page__decor page__decor--8"></span>
-		<span data-decor-item class="page__decor page__decor--9"></span>
-		<span data-decor-item class="page__decor page__decor--10"></span>
-		<span data-decor-item class="page__decor page__decor--11"></span>
-		<span data-decor-item class="page__decor page__decor--12"></span>
-		<span data-decor-item class="page__decor page__decor--13"></span>
-		<span data-decor-item class="page__decor page__decor--14"></span>
-		<span data-decor-item class="page__decor page__decor--15"></span>
-		<span data-decor-item class="page__decor page__decor--16"></span>
-		<span data-decor-item class="page__decor page__decor--17"></span>
-		<span data-decor-item class="page__decor page__decor--18"></span>
-		<span data-decor-item class="page__decor page__decor--19"></span>
-		<span data-decor-item class="page__decor page__decor--20"></span>
+	<div data-decor-body data-decor-max-speed="1" data-decor-min-speed="0.6" class="page">
+		<span data-decor-item class="page__decor page__decor--1">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--2">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--3">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--4">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--5">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--6">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--7">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--8">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--9">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--10">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--11">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--12">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--13">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--14">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--15">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--16">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--17">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--18">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--19">
+			<img src="1.png" alt="">
+		</span>
+		<span data-decor-item class="page__decor page__decor--20">
+			<img src="1.png" alt="">
+		</span>
 	</div>
 </body>
 <script src="script.js"></script>
